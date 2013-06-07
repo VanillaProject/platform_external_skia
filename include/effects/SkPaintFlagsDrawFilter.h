@@ -17,7 +17,7 @@ public:
     SkPaintFlagsDrawFilter(uint32_t clearFlags, uint32_t setFlags);
     
     // overrides
-    virtual bool filter(SkPaint*, Type);
+    virtual void filter(SkPaint*, Type);
     
 private:
     uint32_t    fPrevFlags;     // local cache for filter/restore

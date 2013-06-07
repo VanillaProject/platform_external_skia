@@ -405,7 +405,6 @@ public:
                      intersect with the canvas' clip
     */
     bool quickReject(const SkRect& rect, EdgeType et) const;
-    bool quickReject(const SkRect& rect) const { return false; }
 
     /** Return true if the specified path, after being transformed by the
         current matrix, would lie completely outside of the current clip. Call
@@ -419,7 +418,6 @@ public:
                      intersect with the canvas' clip
     */
     bool quickReject(const SkPath& path, EdgeType et) const;
-    bool quickReject(const SkPath& path) const { return false; }
 
     /** Return true if the horizontal band specified by top and bottom is
         completely clipped out. This is a conservative calculation, meaning
@@ -647,8 +645,6 @@ public:
     */
     virtual void drawBitmap(const SkBitmap& bitmap, SkScalar left, SkScalar top,
                             const SkPaint* paint = NULL);
-
-    virtual void drawBitmapRectToRect(const SkBitmap&, const SkRect*, const SkRect&, const SkPaint*) {}
 
     /** Draw the specified bitmap, with the specified matrix applied (before the
         canvas' matrix is applied).
@@ -898,6 +894,9 @@ public:
 
     void setExternalMatrix(const SkMatrix* = NULL);
 
+    virtual void drawBitmapScalarRect(const SkBitmap& bitmap, const SkRect* src,
+                                const SkRect& dst, const SkPaint* paint = NULL);
+
     ///////////////////////////////////////////////////////////////////////////
 
     /** After calling saveLayer(), there can be any number of devices that make
@@ -986,6 +985,8 @@ private:
     void internalDrawBitmap(const SkBitmap&, const SkIRect*, const SkMatrix& m,
                                   const SkPaint* paint);
     void internalDrawBitmapRect(const SkBitmap& bitmap, const SkIRect* src,
+                                const SkRect& dst, const SkPaint* paint);
+    void internalDrawBitmapScalarRect(const SkBitmap& bitmap, const SkRect* src,
                                 const SkRect& dst, const SkPaint* paint);
     void internalDrawBitmapNine(const SkBitmap& bitmap, const SkIRect& center,
                                 const SkRect& dst, const SkPaint* paint);
